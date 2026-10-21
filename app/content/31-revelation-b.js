@@ -88,11 +88,9 @@
           { h: "Endurance", d: "Sacrificial love and endurance define true faithfulness, not clinging to rules for their own sake." }
         ] },
         { t: "callout", kind: "insight", title: "The core tension of the book", text: "Will God's people 'conquer' (Revelation 3:5) despite persecution? Revelation uses war language again and again (e.g. 1:16; 2:16; 6:4; 12:7; 13:7; 19:15) because faithfulness is how believers take part in the cosmic war against evil. It is fought not with swords but with endurance, sacrificial love and trust. **To conquer is not to kill one's enemies, but to love them as the Lamb did.**" },
-        { t: "callout", kind: "warn", title: "A note on Revelation 3:10", text: "Some read 'I will keep you from the hour of trial' as proof of a pre-tribulation rapture of the Church. This study holds that this reading takes the verse out of context and adds assumptions that are not there, and that the pre-tribulation rapture idea is not supported by Scripture and distorts the heart of the gospel. The rapture debate itself is not covered further here." }
-      ]
-    }
+        { t: "callout", kind: "warn", title: "A note on Revelation 3:10", text: "Some read 'I will keep you from the hour of trial' as proof of a pre-tribulation rapture of the Church. This study holds that this reading takes the verse out of context and adds assumptions that are not there, and that the pre-tribulation rapture idea is not supported by Scripture and distorts the heart of the gospel. The rapture debate itself is not covered further here." },
+        { t: "flip", title: "Flashcards: the seven churches", items: [ { front: "Apokalypsis", back: "Greek for unveiling: God disclosing hidden truth and His view of history." }, { front: "Exegesis vs. eisegesis", back: "Drawing meaning out of the text in context vs. reading our own assumptions into it." }, { front: "Seven golden lampstands", back: "The seven churches (Rev 1:20), drawn from Zechariah 4: God present among His people." }, { front: "Ephesus / Laodicea", back: "Ephesus: truth without love. Laodicea: lukewarm, comfortable and self-reliant." }, { front: "Smyrna / Philadelphia", back: "Smyrna: faithful under persecution. Philadelphia: a faithful remnant keeping His word." }, { front: "To conquer", back: "Faithful, loving endurance; not killing enemies but loving them as the Lamb did." } ] } ] }
   ],
-  extraFlip: true,
   keypoints: [
     "'Apokalypsis' means 'unveiling': God revealing His view of history, not a picture of chaos.",
     "Most biblical prophecy speaks to the prophet's own day; read Revelation in its original context (exegesis, not eisegesis).",
@@ -201,9 +199,8 @@
           ["Exile of Judah (Jeremiah 29:10-14; Ezekiel 36:24-28)", "Discipline with a promise of restoration"],
           ["The cross (Isaiah 53:5; Romans 3:24-26; 5:8-9)", "God judged sin to bring salvation"]
         ] },
-        { t: "callout", kind: "note", title: "The Lamb reigns, even when you can't see it", text: "Before history's judgments are shown, we must know who rules history: God on His throne, with the slain Lamb sharing it as rightful King. The question for every reader: will we follow the way of the beast (power, domination, violence) or the way of the Lamb (sacrificial love, faithfulness, endurance)? However chaotic the world looks, the Lamb is on the throne and His kingdom will prevail." }
-      ]
-    }
+        { t: "callout", kind: "note", title: "The Lamb reigns, even when you can't see it", text: "Before history's judgments are shown, we must know who rules history: God on His throne, with the slain Lamb sharing it as rightful King. The question for every reader: will we follow the way of the beast (power, domination, violence) or the way of the Lamb (sacrificial love, faithfulness, endurance)? However chaotic the world looks, the Lamb is on the throne and His kingdom will prevail." },
+        { t: "flip", title: "Flashcards: the throne room", items: [ { front: "24 elders", back: "12 tribes + 12 apostles: the fullness of God's people." }, { front: "Four living creatures", back: "All creation worshipping God (Ezekiel 1:5-14)." }, { front: "The sealed scroll", back: "God's plan of redemption through judgment, which only a worthy mediator can open." }, { front: "Lion of Judah / Root of David", back: "Messianic titles from Genesis 49:9 and Isaiah 11:1." }, { front: "Arnion", back: "Greek 'little lamb': the slain Lamb who conquers by self-sacrifice." }, { front: "Seals, trumpets, bowls", back: "Three overlapping views of the same era, like a spiral staircase." } ] } ] }
   ],
   keypoints: [
     "The throne room shows God's sovereignty over history, using images from Isaiah 6 and Ezekiel 1.",
@@ -334,9 +331,8 @@
           "Those who overcome not by violence but by endurance.",
           "Those who understand that conquering means loving, sacrificing and bearing witness to the truth."
         ] },
-        { t: "callout", kind: "insight", text: "The Lamb leads His army not to bloodshed but to victory through faithfulness. Are we willing to serve in Christ's army?" }
-      ]
-    }
+        { t: "callout", kind: "insight", text: "The Lamb leads His army not to bloodshed but to victory through faithfulness. Are we willing to serve in Christ's army?" },
+        { t: "flip", title: "Flashcards: seals and martyrs", items: [ { front: "White horse", back: "Conquest and imperial domination (victory-parade imagery), not Christ." }, { front: "Black horse", back: "Famine and economic oppression: a day's wage for a measure of wheat." }, { front: "Hades", back: "The grave, the realm of the dead awaiting resurrection; not eternal torment." }, { front: "'How long, Lord?'", back: "The martyrs' cry (Rev 6:10), echoing Psalm 94:3, Jeremiah 12:4, Habakkuk 1:2." }, { front: "144,000", back: "Symbolic fullness of God's people; heard as Israel, seen as a multitude from all nations." }, { front: "Faithfulness vs. pacifism", back: "Love refuses revenge but also protects: 'love always protects'." } ] } ] }
   ],
   keypoints: [
     "The four horsemen come from Zechariah 1 and 6 and stand for conquest, war, famine and death, forces present in every age.",
@@ -362,15 +358,10 @@
   summary: "The seventh seal opens into seven trumpets that retell the story through the Exodus plagues. Judgment alone does not make the nations repent. Only when the two witnesses die and are raised, showing God's grace, do the nations turn, and the seventh trumpet announces that the world's kingdom has become God's.",
   sections: [
     {
-      h: "Silence, Then Trumpets",
+      h: "Silence, Then Seven Trumpets Echoing Exodus",
       blocks: [
         { t: "p", text: "When the seventh seal is broken, something unexpected happens: **silence** (Revelation 8:1). It prepares for the next stage. From the seventh seal come seven trumpets, a reminder that Revelation is **recursive, not linear**: each cycle shows the same reality from a new angle." },
-        { t: "p", text: "The trumpets do not describe new events. They retell the story using the imagery of **Israel's Exodus from Egypt**. As God sent plagues on Egypt to challenge Pharaoh and free His people, these trumpets fall on oppressive nations as a wake-up call to repent." }
-      ]
-    },
-    {
-      h: "The Seven Trumpets and Echoes of Exodus",
-      blocks: [
+        { t: "p", text: "The trumpets do not describe new events. They retell the story using the imagery of **Israel's Exodus from Egypt**. As God sent plagues on Egypt to challenge Pharaoh and free His people, these trumpets fall on oppressive nations as a wake-up call to repent." },
         { t: "table", title: "Every trumpet and its Old Testament background", head: ["Trumpet", "In Revelation", "Old Testament background"], rows: [
           ["1st", "Hail and fire mixed with blood (8:7)", "The plague of hail and fire on Egypt (Exodus 9:23-24)"],
           ["2nd", "A burning mountain turns the sea to blood (8:8-9)", "The Nile turned to blood (Exodus 7:20-21)"],
@@ -465,9 +456,8 @@
           "The world is won not by force, fear or domination, but by faithful endurance and God's grace.",
           "Empires conquer by oppression and violence; God conquers hearts by love, forgiveness and endurance."
         ] },
-        { t: "p", text: "That is why the gospel spread so fast in the ancient church and spreads in persecuted countries today. People saw in the martyrs a love the world could not offer: self-sacrificial, unwavering and refusing to retaliate even facing death. The two witnesses represent the Church's mission: to testify to God's truth even when it costs everything. The real question is not 'How can we escape suffering?' but **'Will we remain faithful in the midst of tribulation?'**" }
-      ]
-    }
+        { t: "p", text: "That is why the gospel spread so fast in the ancient church and spreads in persecuted countries today. People saw in the martyrs a love the world could not offer: self-sacrificial, unwavering and refusing to retaliate even facing death. The two witnesses represent the Church's mission: to testify to God's truth even when it costs everything. The real question is not 'How can we escape suffering?' but **'Will we remain faithful in the midst of tribulation?'**" },
+        { t: "flip", title: "Flashcards: trumpets and witnesses", items: [ { front: "Trumpets 1-5", back: "Echo Exodus plagues: hail and fire, blood, poisoned water, darkness, locusts." }, { front: "Revelation 9:20-21", back: "Despite the plagues, the nations do not repent, like Pharaoh." }, { front: "Bitter-sweet scroll", back: "Sweet hope of the Kingdom, bitter suffering first; echoes Ezekiel 2:8-3:3." }, { front: "Measuring the temple", back: "God protecting His people, the true temple (Zechariah 2:1-5; 1 Cor 3:16)." }, { front: "Two witnesses", back: "Lampstands (God's people) modelled on Moses and Elijah, the Law and the Prophets." }, { front: "Seventh trumpet", back: "'The kingdom of the world has become the kingdom of our Lord': transformation, not destruction." } ] } ] }
   ],
   keypoints: [
     "The seventh seal opens into silence and then the seven trumpets: the same story retold from a new angle.",
@@ -581,9 +571,8 @@
         ] },
         { t: "p", text: "Believers overcome by following the **way of the Lamb**: not through military might or political power, but through sacrificial faithfulness. This is not a ban on Christians taking part in politics or the military. It concerns their attitude, motives, values and focus. Jesus' victory through the gift of His life calls His followers to share His self-giving spirit." },
         { t: "p", text: "'They did not love their lives' simply means they put faithfulness to Christ above self-preservation, choosing death rather than denying Him. They were **martyrs**." },
-        { t: "callout", kind: "note", title: "Conclusion: the real enemy", text: "The seven churches faced persecution under beastly human empires. John lovingly reminds them, and us, that the Messiah has already triumphed. The dragon's power is real but **limited and temporary**. Our battle is not against the people of Rome, Babylon or any empire, but against the unseen spiritual forces working behind them. So we stay faithful and brave, refuse endless retaliation, and persevere, knowing the final victory is already secure in Christ." }
-      ]
-    }
+        { t: "callout", kind: "note", title: "Conclusion: the real enemy", text: "The seven churches faced persecution under beastly human empires. John lovingly reminds them, and us, that the Messiah has already triumphed. The dragon's power is real but **limited and temporary**. Our battle is not against the people of Rome, Babylon or any empire, but against the unseen spiritual forces working behind them. So we stay faithful and brave, refuse endless retaliation, and persevere, knowing the final victory is already secure in Christ." },
+        { t: "flip", title: "Flashcards: the dragon and the woman", items: [ { front: "Nachash", back: "The Eden 'serpent': a shining, reptile-like angelic being; in Revelation the red dragon." }, { front: "The woman", back: "Israel (Joseph's dream, Genesis 37:9), mother of the Messiah; later all believers." }, { front: "Rod of iron", back: "Unbreakable, lasting authority of the Messiah (Psalm 2:9)." }, { front: "1,260 days", back: "42 months = 3.5 years: half of seven, a season of trial before deliverance." }, { front: "Pella", back: "Where Jewish believers reportedly fled before Jerusalem fell (AD 66-70)." }, { front: "Revelation 12:11", back: "They conquered by the blood of the Lamb and the word of their testimony." } ] } ] }
   ],
   keypoints: [
     "Revelation 12-15 presents seven 'signs' (semeion = symbol) that unveil the cosmic war behind earthly persecution.",
