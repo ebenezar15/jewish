@@ -116,13 +116,23 @@ function toast(msg){ var t = $("#toast"); t.textContent = msg; t.classList.add("
 /* ---------- download: saves this whole app as one offline file ---------- */
 var PRISTINE = null;
 function download(){
-  var html = "<!DOCTYPE html>\n" + PRISTINE;
-  var blob = new Blob([html], {type:"text/html"});
+  var html = "<!DOCTYPE html>\n" + PRISTINE, name = "roots-and-branches.html";
+  var hosted = window.claude && typeof window.claude.use === "function";
+  if (hosted){
+    toast("Preparing your download\u2026");
+    window.claude.use("downloads").then(function(dl){
+      if (!dl) return toast("Downloads aren\u2019t available in this view. Open the app in a browser to save it.");
+      return dl.save({filename:name, data:new Blob([html], {type:"text/html"})}).then(function(){
+        toast("Saved " + name + ". Open it on any device, even offline.");
+      }, function(e){ if (e && e.code !== "declined") toast("The file wasn\u2019t saved. Try again in a moment."); });
+    });
+    return;
+  }
   var a = document.createElement("a");
-  a.href = URL.createObjectURL(blob); a.download = "roots-and-branches.html";
+  a.href = URL.createObjectURL(new Blob([html], {type:"text/html"})); a.download = name;
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
-  toast("Saved roots-and-branches.html. Open it on any device, even offline.");
+  toast("Saved " + name + ". Open it on any device, even offline.");
 }
 
 /* ---------- search ---------- */
@@ -403,7 +413,11 @@ function bindView(b, c){
 }
 
 /* ---------- boot ---------- */
-PRISTINE = document.documentElement.outerHTML;
+PRISTINE = (function(){
+  var h = "", b = "";
+  $$("[data-app]").forEach(function(el){ if (el.tagName === "SCRIPT") b += el.outerHTML + "\n"; else h += el.outerHTML + "\n"; });
+  return '<html lang="en">\n<head>\n<meta charset="utf-8">\n' + h + '</head>\n<body>\n<main id="app"></main>\n' + b + '</body>\n</html>';
+})();
 applyTheme(); shell(); buildIndex();
 window.addEventListener("hashchange", route);
 route();
