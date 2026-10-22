@@ -503,3 +503,9 @@ footer{border-top:1px solid var(--line); padding:24px 16px 80px; color:var(--mut
 .geo{max-height:72vh; width:100%}
 
 .gather-src{font-size:.82rem; color:var(--muted); margin:0 0 6px}
+
+.geo-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:10px}
+.geo-swipe{display:none}
+.t-name{fill:var(--ink); font-size:13px; font-weight:700; pointer-events:none; paint-order:stroke; stroke:var(--surface); stroke-width:3px}
+@media (max-width:640px){ .geo-neareast{min-width:640px; max-height:none} .geo-swipe{display:inline} }
+.geo-swipe.hide{display:none!important}

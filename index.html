@@ -519,6 +519,12 @@ footer{border-top:1px solid var(--line); padding:24px 16px 80px; color:var(--mut
 
 .gather-src{font-size:.82rem; color:var(--muted); margin:0 0 6px}
 
+.geo-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:10px}
+.geo-swipe{display:none}
+.t-name{fill:var(--ink); font-size:13px; font-weight:700; pointer-events:none; paint-order:stroke; stroke:var(--surface); stroke-width:3px}
+@media (max-width:640px){ .geo-neareast{min-width:640px; max-height:none} .geo-swipe{display:inline} }
+.geo-swipe.hide{display:none!important}
+
 </style>
 </head>
 <body>
@@ -27863,8 +27869,8 @@ function poly(pr, pts){ return pts.map(function(q, i){ var p = pr.p(q[0], q[1]);
 function line(pr, pts){ return pts.map(function(q, i){ var p = pr.p(q[0], q[1]); return (i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1); }).join(""); }
 X.map = {
   render: function(k, H){
-    var b = BASES[k.base] || BASES.neareast, pr = proj(b), s = pr.W/1000, fs = k.base === "israel" ? 15 : 17;
-    var svg = '<svg viewBox="0 0 '+pr.W+' '+pr.H+'" class="geo" role="img" aria-label="'+H.esc(H.plain(k.title||"Map"))+'">'+
+    var b = BASES[k.base] || BASES.neareast, pr = proj(b), s = pr.W/1000, fs = k.base === "israel" ? 30 : 17;
+    var svg = '<svg viewBox="0 0 '+pr.W+' '+pr.H+'" class="geo geo-'+(k.base||"neareast")+'" role="img" aria-label="'+H.esc(H.plain(k.title||"Map"))+'">'+
       '<rect width="100%" height="100%" class="land"/>'+
       ["med","red","gulf","cyprus","dead","galilee"].map(function(n){ return '<path class="'+(n==="cyprus"?"island":"sea")+'" d="'+poly(pr, GEO[n])+'"/>'; }).join("")+
       GEO.rivers.map(function(r){ return '<path class="river" d="'+line(pr, r)+'"/>'; }).join("")+
@@ -27878,17 +27884,27 @@ X.map = {
       svg += '<path class="route" data-r="'+i+'" style="--rc:'+(r.color||"var(--accent)")+'" d="M'+a[0].toFixed(1)+' '+a[1].toFixed(1)+' Q'+cx.toFixed(1)+' '+cy.toFixed(1)+' '+z[0].toFixed(1)+' '+z[1].toFixed(1)+'" marker-end="url(#ah)"/>';
     });
     (k.places||[]).forEach(function(pl, i){
-      var p = byName[pl.name], anchor = pl.label === "left" ? "end" : "start", off = pl.label === "left" ? -12 : 12;
+      var p = byName[pl.name], left = pl.label === "left" || (pl.label !== "right" && p[0] > pr.W*0.8), anchor = left ? "end" : "start", off = left ? -12 : 12;
       svg += '<g class="place" data-i="'+i+'" tabindex="0" role="button" aria-label="'+H.esc(pl.name)+'"><circle class="halo" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="16"/><circle class="dot" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="7"/><text x="'+(p[0]+off).toFixed(1)+'" y="'+(p[1]+5).toFixed(1)+'" text-anchor="'+anchor+'" font-size="'+fs+'">'+H.esc(pl.name)+'</text></g>';
     });
     svg += '<defs><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink)" opacity=".7"/></marker></defs></svg>';
     var legend = (k.routes||[]).length ? '<div class="geo-legend">'+k.routes.map(function(r, i){ return '<button class="chip" data-r="'+i+'"><i style="background:'+(r.color||"var(--accent)")+'"></i>'+H.md(r.label||(r.from+" to "+r.to))+'</button>'; }).join("")+'</div>' : "";
-    return H.title(k, H.I.map)+'<div class="geo-wrap" data-k="'+J(k)+'">'+svg+
-      '<div class="geo-bar">'+((k.routes||[]).length?'<button class="btn small play">Play the journey</button>':'')+'<span class="geo-hint">Tap a place to learn about it.</span></div>'+legend+
+    return H.title(k, H.I.map)+'<div class="geo-wrap" data-k="'+J(k)+'"><div class="geo-scroll">'+svg+'</div>'+
+      '<div class="geo-bar">'+((k.routes||[]).length?'<button class="btn small play">Play the journey</button>':'')+'<span class="geo-hint">Tap a place to learn about it.<span class="geo-swipe'+(k.base==="israel"?" hide":"")+'"> Swipe the map sideways to see more.</span></span></div>'+legend+
       '<div class="geo-info" aria-live="polite">'+H.md(k.intro||"")+'</div></div>';
   },
   wire: function(el, H){
     var k = rd(el), info = el.querySelector(".geo-info"), routes = el.querySelectorAll(".route"), timer = [];
+    // on narrow screens the map is wider than the card: start it centred on the places
+    var sc = el.querySelector(".geo-scroll"), dots = el.querySelectorAll(".place .dot");
+    function centre(){
+      if (sc.scrollWidth <= sc.clientWidth || !dots.length) return;
+      var svgEl = el.querySelector("svg"), vb = svgEl.viewBox.baseVal, start = 0;
+      if (k.routes && k.routes.length) k.places.forEach(function(pl, i){ if (pl.name === k.routes[0].from) start = i; });
+      var cx = +dots[start].getAttribute("cx");
+      sc.scrollLeft = Math.max(0, cx/vb.width*svgEl.getBoundingClientRect().width - sc.clientWidth*0.3);
+    }
+    setTimeout(centre, 60);
     function show(i){ var pl = k.places[i]; el.querySelectorAll(".place").forEach(function(g){ g.classList.toggle("on", +g.dataset.i === i); }); info.innerHTML = '<b>'+H.md(pl.name)+'</b>'+(pl.d?'<p>'+H.md(pl.d)+'</p>':''); }
     el.querySelectorAll(".place").forEach(function(g){
       g.addEventListener("click", function(){ show(+g.dataset.i); });
@@ -27938,8 +27954,8 @@ X.tabernacle = {
       var shape = t.r ? '<circle cx="'+t.x+'" cy="'+t.y+'" r="'+t.r+'"/>' : '<rect x="'+t.x+'" y="'+t.y+'" width="'+t.w+'" height="'+t.h+'" rx="3"/>';
       g += '<g class="t-item t-'+t.key+'" data-key="'+t.key+'" tabindex="0" role="button" aria-label="'+t.label+'">'+shape+'</g>';
     });
-    // re-draw small items above the Holy Place hit area
-    var order = ["lampstand","table","incense","veil","ark"];
+    var LBL = {gate:[872,272,"Gate"], altar:[730,250,"Altar"], laver:[590,238,"Laver"], lampstand:[380,256,"Lampstand"], table:[392,194,"Table"], incense:[301,236,"Incense"], veil:[248,280,"Veil"], ark:[176,240,"Ark"]};
+    Object.keys(LBL).forEach(function(key){ var l = LBL[key]; g += '<text class="t-name" x="'+l[0]+'" y="'+l[1]+'" text-anchor="middle">'+l[2]+'</text>'; });
     return H.title(k, H.I.map)+'<div class="tab-wrap" data-k="'+J(k)+'"><svg viewBox="0 0 940 400" class="tab-svg" role="img" aria-label="Floor plan of the tabernacle">'+g+'</svg>'+
       '<div class="geo-bar"><button class="btn small walk">Walk from the gate to the ark</button><span class="geo-hint">Or tap any piece of furniture.</span></div>'+
       '<div class="tab-info" aria-live="polite"><b>'+H.md(k.intro_h||"Approaching a holy God")+'</b><p>'+H.md(k.intro||"Every worshipper came in from the east, past the altar and the water, toward the presence of God behind the veil.")+'</p></div></div>';
