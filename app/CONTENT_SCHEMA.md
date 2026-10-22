@@ -43,3 +43,16 @@ Strings in blocks support `**bold**` and `*italic*`.
 | `flip` | `title?`, `items[{front, back}]` | flip flashcards (auto-collected into Flashcards) |
 
 Run `python3 app/build.py` to bundle everything into `index.html`.
+
+## Interactive blocks (src/blocks2.js)
+
+| t | fields | renders as |
+|---|---|---|
+| `map` | `title`, `base` (`neareast`: Egypt to Persia, lon 24–52 / lat 24–38.5; or `israel`: lon 33.9–36.9 / lat 29.4–33.7), `intro?`, `regions?[{name,lon,lat}]` (big faint labels like "EGYPT"), `places[{name, lon, lat, d, label?:"left"}]`, `routes?[{from, to, label, d?, color?, bend?}]` (`from`/`to` are place names; `bend` -0.4..0.4 curves the arrow) | real-coordinate map; routes animate in order, places tap for info |
+| `tabernacle` | `title`, `intro_h?`, `intro?`, `items{gate, altar, laver, holyplace, lampstand, table, incense, veil, ark}` each `{h, d, ref?, christ?}` | clickable tabernacle floor plan with a guided walk |
+| `connect` | `title`, `left?`, `right?`, `pairs[{a, b, d, ref?}]` | two columns joined by drawn lines; tap to explain the link |
+| `match` | `title`, `how?`, `pairs[{a, b}]` (4–8) | tap-to-match game, right column shuffled |
+| `rings` | `title`, `center?`, `hint?`, `items[{h, d}]` outermost first (3–6) | concentric clickable zones |
+| `kings` | `title`, `items[{name, group, when, verdict:"good"/"bad"/"mixed", d, ref}]` | filterable reign chart (filter chips by `group`) |
+| `stepper` | `title`, `items[{h, d, why?, christ?, ref?}]` | step-by-step animated walkthrough |
+| `accordion` | `title?`, `items[{h, d, ref?}]` (`d` may contain blank-line paragraphs) | expandable details |

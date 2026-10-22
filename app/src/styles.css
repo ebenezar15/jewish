@@ -133,7 +133,7 @@ main{min-height:70vh}
 @keyframes flicker{0%{transform:scale(1) skewX(0)} 50%{transform:scale(1.05,.95) skewX(2deg)} 100%{transform:scale(.96,1.06) skewX(-2deg)}}
 @keyframes glow{to{opacity:.35}}
 
-.books{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:16px 0 40px}
+.books{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:18px; padding:16px 0 40px}
 .book{position:relative; display:flex; flex-direction:column; gap:10px; text-decoration:none; color:var(--ink);
   background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:22px; overflow:hidden; min-height:300px;
   transition: transform .35s var(--ease), border-color .3s}
@@ -147,7 +147,7 @@ main{min-height:70vh}
 .ring{--p:0; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; font-size:.7rem; font-weight:700; color:var(--ink);
   background: radial-gradient(closest-side, var(--surface) 76%, transparent 78% 100%), conic-gradient(var(--bk, var(--accent)) calc(var(--p)*1%), var(--surface-2) 0)}
 
-.tools{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; padding-bottom:56px}
+.tools{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; padding-bottom:56px}
 .tool{background:var(--surface-2); border-radius:var(--radius-md); padding:18px; text-decoration:none; color:var(--ink); border:1px solid transparent}
 .tool:hover{border-color:var(--accent)}
 .tool svg{width:28px; height:28px; color:var(--accent)}
@@ -371,3 +371,135 @@ footer{border-top:1px solid var(--line); padding:24px 16px 80px; color:var(--mut
 .mm-branches::before{top:24px}
 .gloss .term{align-content:start; align-items:start; gap:8px}
 .gloss .term .w{font-size:1.2rem; line-height:1.25}
+
+/* ---------- extension blocks ---------- */
+.btn.small{padding:8px 14px; font-size:.85rem}
+.btn[disabled]{opacity:.4; cursor:default}
+.chip{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:5px 12px; font-size:.82rem; font-weight:600}
+.chip i{width:12px; height:12px; border-radius:50%; display:inline-block}
+.chip.on{border-color:var(--accent); background:color-mix(in srgb, var(--accent) 14%, var(--surface))}
+.geo-bar{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:10px 0}
+.geo-hint{font-size:.85rem; color:var(--muted)}
+
+/* map */
+.geo-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:12px}
+.geo{width:100%; height:auto; display:block; border-radius:10px}
+.geo .land{fill:color-mix(in srgb, var(--second) 16%, var(--surface))}
+.geo .sea{fill:color-mix(in srgb, var(--accent) 22%, var(--surface)); stroke:color-mix(in srgb, var(--accent) 45%, transparent); stroke-width:1.2}
+.geo .island{fill:color-mix(in srgb, var(--second) 16%, var(--surface)); stroke:color-mix(in srgb, var(--accent) 45%, transparent)}
+.geo .river{fill:none; stroke:color-mix(in srgb, var(--accent) 55%, transparent); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round}
+.geo .sealabel{fill:color-mix(in srgb, var(--accent) 70%, var(--ink)); font-style:italic; opacity:.75; text-anchor:middle}
+.geo .region{fill:var(--muted); font-weight:700; letter-spacing:.12em; text-anchor:middle; opacity:.8}
+.geo .route{fill:none; stroke:var(--rc); stroke-width:4; stroke-linecap:round; opacity:0}
+.geo .route.shown{opacity:.9}
+.geo .place{cursor:pointer}
+.geo .place .dot{fill:var(--ink); stroke:var(--surface); stroke-width:2.5}
+.geo .place .halo{fill:var(--accent); opacity:0; transform-box:fill-box; transform-origin:center}
+.geo .place text{fill:var(--ink); font-weight:700; paint-order:stroke; stroke:var(--surface); stroke-width:4px; stroke-linejoin:round}
+.geo .place.on .halo, .geo .place:hover .halo, .geo .place:focus .halo{opacity:.35; animation:pulse 1.4s ease-out infinite}
+.geo .place.on .dot{fill:var(--accent)}
+@keyframes pulse{from{transform:scale(.6); opacity:.5} to{transform:scale(1.6); opacity:0}}
+.geo-legend{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px}
+.geo-info,.tab-info,.con-info,.rings-info{background:var(--surface-2); border-radius:10px; padding:12px 14px; min-height:64px; font-size:.95rem}
+.geo-info p,.tab-info p,.con-info p,.rings-info p{margin:4px 0 0}
+.geo-info small,.tab-info small,.con-info small{display:block; color:var(--muted); font-weight:600}
+
+/* tabernacle */
+.tab-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:12px}
+.tab-svg{width:100%; height:auto; display:block}
+.t-court{fill:color-mix(in srgb, var(--second) 12%, var(--surface)); stroke:var(--second); stroke-width:3; stroke-dasharray:2 6; stroke-linecap:round}
+.t-mostholy{fill:color-mix(in srgb, var(--accent) 22%, var(--surface)); stroke:var(--accent); stroke-width:2}
+.t-holy{fill:color-mix(in srgb, var(--accent) 10%, var(--surface)); stroke:var(--accent); stroke-width:2; cursor:pointer}
+.t-holy.on{fill:color-mix(in srgb, var(--accent) 18%, var(--surface))}
+.t-lab{fill:var(--muted); font-size:14px; font-weight:700}
+.t-lab.small{font-size:12px; font-weight:600}
+.t-walk{fill:none; stroke:var(--flame); stroke-width:4; stroke-linecap:round; stroke-dasharray:2000; stroke-dashoffset:2000; opacity:.9}
+.t-item{cursor:pointer}
+.t-item rect,.t-item circle{fill:var(--surface); stroke:var(--ink); stroke-width:2.5; transition:fill .3s, transform .3s; transform-box:fill-box; transform-origin:center}
+.t-altar rect{fill:color-mix(in srgb, #B87333 55%, var(--surface))}
+.t-laver circle{fill:color-mix(in srgb, #4A90C2 45%, var(--surface))}
+.t-lampstand circle,.t-table rect,.t-incense rect,.t-ark rect{fill:color-mix(in srgb, #D4AF37 60%, var(--surface))}
+.t-veil rect{fill:color-mix(in srgb, #8B1E3F 65%, var(--surface))}
+.t-gate rect{fill:color-mix(in srgb, #2B59C3 45%, var(--surface))}
+.t-item.on rect,.t-item.on circle,.t-item:hover rect,.t-item:hover circle{stroke:var(--accent); stroke-width:4; transform:scale(1.12)}
+.t-item:focus{outline:none}
+.tab-christ,.st-christ{border-left:3px solid var(--second); padding-left:10px}
+
+/* connect */
+.con{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:14px}
+.con-head{display:grid; grid-template-columns:1fr 60px 1fr; font-weight:700; color:var(--muted); font-size:.85rem; margin-bottom:8px}
+.con-head span:last-child{grid-column:3}
+.con-grid{position:relative; display:grid; grid-template-columns:1fr 60px 1fr; row-gap:8px; align-items:center}
+.con-lines{position:absolute; inset:0; pointer-events:none; overflow:visible}
+.con-lines path{fill:none; stroke:var(--line); stroke-width:2; stroke-dasharray:400; stroke-dashoffset:400}
+.drawn .con-lines path{animation: draw 1s var(--ease) forwards}
+.con-lines path.on{stroke:var(--accent); stroke-width:3.5; stroke-dashoffset:0}
+.con-l,.con-r{text-align:left; padding:9px 12px; border-radius:10px; border:1px solid var(--line); background:var(--surface-2); font-size:.9rem; font-weight:600; position:relative; z-index:1}
+.con-r{background:color-mix(in srgb, var(--accent) 10%, var(--surface))}
+.con-l.on,.con-r.on{border-color:var(--accent); background:var(--accent); color:var(--accent-ink)}
+.con-info{margin-top:12px}
+@media (max-width:520px){ .con-grid,.con-head{grid-template-columns:1fr 24px 1fr} .con-l,.con-r{font-size:.8rem; padding:7px 8px} }
+
+/* match */
+.match{background:var(--surface-2); border-radius:var(--radius-md); padding:14px}
+.match-how{margin:0 0 10px; color:var(--muted); font-size:.9rem}
+.match-cols{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.match-cols > div{display:grid; gap:8px; align-content:start}
+.m-a,.m-b{text-align:left; padding:10px 12px; border-radius:10px; border:2px solid var(--line); background:var(--surface); font-size:.9rem; font-weight:600; transition:transform .2s, background .3s}
+.m-a.sel{border-color:var(--accent); transform:scale(1.03)}
+.m-a.ok,.m-b.ok{border-color:#2E8B57; background:color-mix(in srgb, #2E8B57 16%, var(--surface)); opacity:.85}
+.m-b.no{border-color:#C0392B; animation:shake .35s}
+.match-score{margin-top:10px; font-weight:700; color:var(--accent)}
+
+/* rings */
+.rings{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; align-items:center}
+.rings-svg{width:100%; max-width:380px; justify-self:center}
+.ring-z{fill:color-mix(in srgb, var(--accent) calc(var(--o)*100%), var(--surface)); stroke:var(--surface); stroke-width:.6; cursor:pointer; transform-origin:50% 50%; animation: grow .7s var(--ease) both}
+.ring-z.on{stroke:var(--second); stroke-width:1.2}
+.ring-t{font-size:3.2px; font-weight:700; fill:var(--ink); pointer-events:none; paint-order:stroke; stroke:var(--surface); stroke-width:.6px}
+@keyframes grow{from{transform:scale(.2); opacity:0}}
+@media (max-width:640px){ .rings{grid-template-columns:1fr} }
+
+/* kings */
+.k-filters{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:10px}
+.k-legend{display:inline-flex; align-items:center; gap:6px; font-size:.78rem; color:var(--muted); margin-left:auto}
+.k-legend i{width:12px; height:12px; border-radius:3px; display:inline-block; margin-left:6px}
+.v-good{--v:#2E8B57} .v-bad{--v:#C0392B} .v-mixed{--v:#D4A017}
+.k-legend i.v-good,.k-legend i.v-bad,.k-legend i.v-mixed{background:var(--v)}
+.k-list{display:grid; gap:6px}
+.k-row{display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto; gap:10px; align-items:center; text-align:left; padding:9px 12px; border-radius:10px; border:1px solid var(--line); border-left:6px solid var(--v); background:var(--surface); animation: slidein .4s var(--ease) both}
+.k-n{font-weight:700}
+.k-when{color:var(--muted); font-size:.85rem}
+.k-g{font-size:.75rem; font-weight:700; padding:2px 8px; border-radius:999px; background:var(--surface-2); color:var(--muted)}
+.k-more{grid-column:1 / -1; display:none; font-size:.92rem; color:var(--ink)}
+.k-more small{display:block; color:var(--muted); margin-top:4px}
+.k-row.open .k-more{display:block; animation: fade .3s}
+.k-row[hidden]{display:none}
+
+/* stepper */
+.stepper{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:16px}
+.st-track{height:4px; background:var(--surface-2); border-radius:4px; overflow:hidden}
+.st-fill{height:100%; width:0; background:var(--accent); transition: width .5s var(--ease)}
+.st-dots{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0}
+.st-dot{width:30px; height:30px; border-radius:50%; border:1px solid var(--line); background:var(--surface-2); font-size:.78rem; font-weight:700; transition: background .3s}
+.st-dot.on{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.st-card{padding:4px 2px; min-height:150px}
+.st-card h4{font-size:1.15rem; margin:4px 0 8px}
+.st-card p{margin:0 0 8px}
+.st-card small{color:var(--muted); font-weight:600}
+.st-num{font-size:.8rem; font-weight:700; color:var(--second)}
+.st-why{color:var(--muted)}
+.st-nav{display:flex; justify-content:space-between; gap:10px; margin-top:8px}
+
+/* accordion */
+.acc{display:grid; gap:8px}
+.acc details{background:var(--surface); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.acc summary{cursor:pointer; padding:12px 16px; font-weight:700; list-style:none; display:flex; justify-content:space-between; gap:10px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+"; font-size:1.3rem; line-height:1; color:var(--accent); transition: transform .3s}
+.acc details[open] summary::after{transform:rotate(45deg)}
+.acc details > div{padding:0 16px 12px; animation: fade .3s}
+.acc small{color:var(--muted); font-weight:600}
+.geo{max-height:72vh; width:100%}
+
+.gather-src{font-size:.82rem; color:var(--muted); margin:0 0 6px}

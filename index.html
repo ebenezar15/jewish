@@ -148,7 +148,7 @@ main{min-height:70vh}
 @keyframes flicker{0%{transform:scale(1) skewX(0)} 50%{transform:scale(1.05,.95) skewX(2deg)} 100%{transform:scale(.96,1.06) skewX(-2deg)}}
 @keyframes glow{to{opacity:.35}}
 
-.books{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:16px 0 40px}
+.books{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:18px; padding:16px 0 40px}
 .book{position:relative; display:flex; flex-direction:column; gap:10px; text-decoration:none; color:var(--ink);
   background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:22px; overflow:hidden; min-height:300px;
   transition: transform .35s var(--ease), border-color .3s}
@@ -162,7 +162,7 @@ main{min-height:70vh}
 .ring{--p:0; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; font-size:.7rem; font-weight:700; color:var(--ink);
   background: radial-gradient(closest-side, var(--surface) 76%, transparent 78% 100%), conic-gradient(var(--bk, var(--accent)) calc(var(--p)*1%), var(--surface-2) 0)}
 
-.tools{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; padding-bottom:56px}
+.tools{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; padding-bottom:56px}
 .tool{background:var(--surface-2); border-radius:var(--radius-md); padding:18px; text-decoration:none; color:var(--ink); border:1px solid transparent}
 .tool:hover{border-color:var(--accent)}
 .tool svg{width:28px; height:28px; color:var(--accent)}
@@ -387,6 +387,138 @@ footer{border-top:1px solid var(--line); padding:24px 16px 80px; color:var(--mut
 .gloss .term{align-content:start; align-items:start; gap:8px}
 .gloss .term .w{font-size:1.2rem; line-height:1.25}
 
+/* ---------- extension blocks ---------- */
+.btn.small{padding:8px 14px; font-size:.85rem}
+.btn[disabled]{opacity:.4; cursor:default}
+.chip{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:5px 12px; font-size:.82rem; font-weight:600}
+.chip i{width:12px; height:12px; border-radius:50%; display:inline-block}
+.chip.on{border-color:var(--accent); background:color-mix(in srgb, var(--accent) 14%, var(--surface))}
+.geo-bar{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:10px 0}
+.geo-hint{font-size:.85rem; color:var(--muted)}
+
+/* map */
+.geo-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:12px}
+.geo{width:100%; height:auto; display:block; border-radius:10px}
+.geo .land{fill:color-mix(in srgb, var(--second) 16%, var(--surface))}
+.geo .sea{fill:color-mix(in srgb, var(--accent) 22%, var(--surface)); stroke:color-mix(in srgb, var(--accent) 45%, transparent); stroke-width:1.2}
+.geo .island{fill:color-mix(in srgb, var(--second) 16%, var(--surface)); stroke:color-mix(in srgb, var(--accent) 45%, transparent)}
+.geo .river{fill:none; stroke:color-mix(in srgb, var(--accent) 55%, transparent); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round}
+.geo .sealabel{fill:color-mix(in srgb, var(--accent) 70%, var(--ink)); font-style:italic; opacity:.75; text-anchor:middle}
+.geo .region{fill:var(--muted); font-weight:700; letter-spacing:.12em; text-anchor:middle; opacity:.8}
+.geo .route{fill:none; stroke:var(--rc); stroke-width:4; stroke-linecap:round; opacity:0}
+.geo .route.shown{opacity:.9}
+.geo .place{cursor:pointer}
+.geo .place .dot{fill:var(--ink); stroke:var(--surface); stroke-width:2.5}
+.geo .place .halo{fill:var(--accent); opacity:0; transform-box:fill-box; transform-origin:center}
+.geo .place text{fill:var(--ink); font-weight:700; paint-order:stroke; stroke:var(--surface); stroke-width:4px; stroke-linejoin:round}
+.geo .place.on .halo, .geo .place:hover .halo, .geo .place:focus .halo{opacity:.35; animation:pulse 1.4s ease-out infinite}
+.geo .place.on .dot{fill:var(--accent)}
+@keyframes pulse{from{transform:scale(.6); opacity:.5} to{transform:scale(1.6); opacity:0}}
+.geo-legend{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px}
+.geo-info,.tab-info,.con-info,.rings-info{background:var(--surface-2); border-radius:10px; padding:12px 14px; min-height:64px; font-size:.95rem}
+.geo-info p,.tab-info p,.con-info p,.rings-info p{margin:4px 0 0}
+.geo-info small,.tab-info small,.con-info small{display:block; color:var(--muted); font-weight:600}
+
+/* tabernacle */
+.tab-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:12px}
+.tab-svg{width:100%; height:auto; display:block}
+.t-court{fill:color-mix(in srgb, var(--second) 12%, var(--surface)); stroke:var(--second); stroke-width:3; stroke-dasharray:2 6; stroke-linecap:round}
+.t-mostholy{fill:color-mix(in srgb, var(--accent) 22%, var(--surface)); stroke:var(--accent); stroke-width:2}
+.t-holy{fill:color-mix(in srgb, var(--accent) 10%, var(--surface)); stroke:var(--accent); stroke-width:2; cursor:pointer}
+.t-holy.on{fill:color-mix(in srgb, var(--accent) 18%, var(--surface))}
+.t-lab{fill:var(--muted); font-size:14px; font-weight:700}
+.t-lab.small{font-size:12px; font-weight:600}
+.t-walk{fill:none; stroke:var(--flame); stroke-width:4; stroke-linecap:round; stroke-dasharray:2000; stroke-dashoffset:2000; opacity:.9}
+.t-item{cursor:pointer}
+.t-item rect,.t-item circle{fill:var(--surface); stroke:var(--ink); stroke-width:2.5; transition:fill .3s, transform .3s; transform-box:fill-box; transform-origin:center}
+.t-altar rect{fill:color-mix(in srgb, #B87333 55%, var(--surface))}
+.t-laver circle{fill:color-mix(in srgb, #4A90C2 45%, var(--surface))}
+.t-lampstand circle,.t-table rect,.t-incense rect,.t-ark rect{fill:color-mix(in srgb, #D4AF37 60%, var(--surface))}
+.t-veil rect{fill:color-mix(in srgb, #8B1E3F 65%, var(--surface))}
+.t-gate rect{fill:color-mix(in srgb, #2B59C3 45%, var(--surface))}
+.t-item.on rect,.t-item.on circle,.t-item:hover rect,.t-item:hover circle{stroke:var(--accent); stroke-width:4; transform:scale(1.12)}
+.t-item:focus{outline:none}
+.tab-christ,.st-christ{border-left:3px solid var(--second); padding-left:10px}
+
+/* connect */
+.con{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:14px}
+.con-head{display:grid; grid-template-columns:1fr 60px 1fr; font-weight:700; color:var(--muted); font-size:.85rem; margin-bottom:8px}
+.con-head span:last-child{grid-column:3}
+.con-grid{position:relative; display:grid; grid-template-columns:1fr 60px 1fr; row-gap:8px; align-items:center}
+.con-lines{position:absolute; inset:0; pointer-events:none; overflow:visible}
+.con-lines path{fill:none; stroke:var(--line); stroke-width:2; stroke-dasharray:400; stroke-dashoffset:400}
+.drawn .con-lines path{animation: draw 1s var(--ease) forwards}
+.con-lines path.on{stroke:var(--accent); stroke-width:3.5; stroke-dashoffset:0}
+.con-l,.con-r{text-align:left; padding:9px 12px; border-radius:10px; border:1px solid var(--line); background:var(--surface-2); font-size:.9rem; font-weight:600; position:relative; z-index:1}
+.con-r{background:color-mix(in srgb, var(--accent) 10%, var(--surface))}
+.con-l.on,.con-r.on{border-color:var(--accent); background:var(--accent); color:var(--accent-ink)}
+.con-info{margin-top:12px}
+@media (max-width:520px){ .con-grid,.con-head{grid-template-columns:1fr 24px 1fr} .con-l,.con-r{font-size:.8rem; padding:7px 8px} }
+
+/* match */
+.match{background:var(--surface-2); border-radius:var(--radius-md); padding:14px}
+.match-how{margin:0 0 10px; color:var(--muted); font-size:.9rem}
+.match-cols{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.match-cols > div{display:grid; gap:8px; align-content:start}
+.m-a,.m-b{text-align:left; padding:10px 12px; border-radius:10px; border:2px solid var(--line); background:var(--surface); font-size:.9rem; font-weight:600; transition:transform .2s, background .3s}
+.m-a.sel{border-color:var(--accent); transform:scale(1.03)}
+.m-a.ok,.m-b.ok{border-color:#2E8B57; background:color-mix(in srgb, #2E8B57 16%, var(--surface)); opacity:.85}
+.m-b.no{border-color:#C0392B; animation:shake .35s}
+.match-score{margin-top:10px; font-weight:700; color:var(--accent)}
+
+/* rings */
+.rings{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; align-items:center}
+.rings-svg{width:100%; max-width:380px; justify-self:center}
+.ring-z{fill:color-mix(in srgb, var(--accent) calc(var(--o)*100%), var(--surface)); stroke:var(--surface); stroke-width:.6; cursor:pointer; transform-origin:50% 50%; animation: grow .7s var(--ease) both}
+.ring-z.on{stroke:var(--second); stroke-width:1.2}
+.ring-t{font-size:3.2px; font-weight:700; fill:var(--ink); pointer-events:none; paint-order:stroke; stroke:var(--surface); stroke-width:.6px}
+@keyframes grow{from{transform:scale(.2); opacity:0}}
+@media (max-width:640px){ .rings{grid-template-columns:1fr} }
+
+/* kings */
+.k-filters{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:10px}
+.k-legend{display:inline-flex; align-items:center; gap:6px; font-size:.78rem; color:var(--muted); margin-left:auto}
+.k-legend i{width:12px; height:12px; border-radius:3px; display:inline-block; margin-left:6px}
+.v-good{--v:#2E8B57} .v-bad{--v:#C0392B} .v-mixed{--v:#D4A017}
+.k-legend i.v-good,.k-legend i.v-bad,.k-legend i.v-mixed{background:var(--v)}
+.k-list{display:grid; gap:6px}
+.k-row{display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto; gap:10px; align-items:center; text-align:left; padding:9px 12px; border-radius:10px; border:1px solid var(--line); border-left:6px solid var(--v); background:var(--surface); animation: slidein .4s var(--ease) both}
+.k-n{font-weight:700}
+.k-when{color:var(--muted); font-size:.85rem}
+.k-g{font-size:.75rem; font-weight:700; padding:2px 8px; border-radius:999px; background:var(--surface-2); color:var(--muted)}
+.k-more{grid-column:1 / -1; display:none; font-size:.92rem; color:var(--ink)}
+.k-more small{display:block; color:var(--muted); margin-top:4px}
+.k-row.open .k-more{display:block; animation: fade .3s}
+.k-row[hidden]{display:none}
+
+/* stepper */
+.stepper{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:16px}
+.st-track{height:4px; background:var(--surface-2); border-radius:4px; overflow:hidden}
+.st-fill{height:100%; width:0; background:var(--accent); transition: width .5s var(--ease)}
+.st-dots{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0}
+.st-dot{width:30px; height:30px; border-radius:50%; border:1px solid var(--line); background:var(--surface-2); font-size:.78rem; font-weight:700; transition: background .3s}
+.st-dot.on{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.st-card{padding:4px 2px; min-height:150px}
+.st-card h4{font-size:1.15rem; margin:4px 0 8px}
+.st-card p{margin:0 0 8px}
+.st-card small{color:var(--muted); font-weight:600}
+.st-num{font-size:.8rem; font-weight:700; color:var(--second)}
+.st-why{color:var(--muted)}
+.st-nav{display:flex; justify-content:space-between; gap:10px; margin-top:8px}
+
+/* accordion */
+.acc{display:grid; gap:8px}
+.acc details{background:var(--surface); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.acc summary{cursor:pointer; padding:12px 16px; font-weight:700; list-style:none; display:flex; justify-content:space-between; gap:10px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+"; font-size:1.3rem; line-height:1; color:var(--accent); transition: transform .3s}
+.acc details[open] summary::after{transform:rotate(45deg)}
+.acc details > div{padding:0 16px 12px; animation: fade .3s}
+.acc small{color:var(--muted); font-weight:600}
+.geo{max-height:72vh; width:100%}
+
+.gather-src{font-size:.82rem; color:var(--muted); margin:0 0 6px}
+
 </style>
 </head>
 <body>
@@ -447,6 +579,29 @@ window.OVERVIEW_REVELATION = [
     {h:"Reading every image literally", items:["Looks for exact matches in today's news","Can create fear and date-setting","Misses the Old Testament echoes"]},
     {h:"Reading as Jewish apocalyptic", items:["Symbols point back to Hebrew Scripture","Numbers carry meaning (7, 12, 3½, 666)","The message is faithfulness and hope"]}
   ]}
+];
+
+window.OVERVIEW_SHADOWS = [
+  {t:"p", text:"God did not hand Israel a list of rituals for their own sake. Every covenant, sacrifice, washing, feast, priest, king and prophet was part of one relationship: **a holy God making a way to live among an unholy people**. This study explains each one in its own world (how it worked, who did it, under what conditions and why), then shows how it was a **shadow** of something fuller that Jesus brings."},
+  {t:"quote", text:"These are a shadow of the things to come, but the substance belongs to Christ.", ref:"Colossians 2:17"},
+  {t:"tree", title:"The skeleton of this study", root:"Shadows and Substance", children:[
+    {h:"The framework", children:["The big story from Eden to the New Jerusalem","The covenants","The Law of Moses"]},
+    {h:"Approaching a holy God", children:["Tabernacle and temple","Sacrifices and offerings","Clean and unclean","Priests and Levites"]},
+    {h:"Holy time", children:["Sabbath, sabbatical year and Jubilee","The sacred calendar and festivals"]},
+    {h:"Leaders and history", children:["The judges","The kings","The prophets","Exile and return"]},
+    {h:"Fulfilment", children:["Reading shadows and types","The relational gospel"]}
+  ]},
+  {t:"timeline", title:"The thread of God dwelling with people", items:[
+    {when:"Beginning", h:"Eden", d:"God walks with Adam and Eve in the garden (Genesis 3:8)."},
+    {when:"c. 1446 BC", h:"The tabernacle", d:"“Let them make me a sanctuary, that I may dwell in their midst” (Exodus 25:8)."},
+    {when:"c. 959 BC", h:"Solomon's temple", d:"The glory cloud fills the house (1 Kings 8:10-11)."},
+    {when:"586 BC", h:"Glory departs, temple destroyed", d:"Ezekiel sees the glory leave (Ezekiel 10–11); Babylon burns the temple."},
+    {when:"c. 4 BC", h:"Jesus", d:"“The Word became flesh and dwelt (tabernacled) among us” (John 1:14)."},
+    {when:"AD 30s", h:"The Spirit in his people", d:"Believers become God's temple (1 Corinthians 3:16; Ephesians 2:21-22)."},
+    {when:"The end", h:"The New Jerusalem", d:"“The dwelling place of God is with man”, and there is no temple, for God and the Lamb are its temple (Revelation 21:3, 22)."}
+  ]},
+  {t:"flow", title:"How every chapter works", nodes:[{h:"In its own world", d:"What it was and how it was done"},{h:"Why God gave it", d:"Theological, cultural and practical reasons"},{h:"The shadow", d:"What it pointed to"},{h:"The substance", d:"How Jesus fulfils it"},{h:"The relationship restored", d:"What it means for us now"}]},
+  {t:"callout", title:"Try the interactive pieces", text:"Look for maps you can play, a tabernacle you can walk through, step-by-step rituals, filterable charts of every king and judge, matching games and connection diagrams. The **Bible atlas** and **Shadow to substance** pages on the home screen gather them all in one place."}
 ];
 
 (window.CHAPTERS = window.CHAPTERS || {})["jesus"] = (window.CHAPTERS["jesus"] || []).concat([
@@ -13646,10 +13801,290 @@ window.BOOKS.push({
   overview: window.OVERVIEW_REVELATION || [],
   chapters: CH.revelation || []
 });
+
+window.BOOKS.push({
+  id: "shadows",
+  title: "Shadows and Substance",
+  short: "Shadows and Substance",
+  tagline: "Kings, priests, prophets, covenants, sacrifices and cleansing laws: the whole Old Testament pattern and how Jesus fulfils it.",
+  intro: "A deep study of how God shaped Israel's life: the covenants, the tabernacle and its sacrifices, purity and cleansing, the Sabbath and feasts, the judges, kings and prophets, and the exile and return. Each one is explained in its own world first, then traced forward to the relational gospel that fulfils it.",
+  icon: "book",
+  color: "#8B1E3F",
+  overview: window.OVERVIEW_SHADOWS || [],
+  chapters: CH.shadows || []
+});
 })();
 
 </script>
 <script data-app>
+/* Extra interactive blocks: map, tabernacle, connect, match, rings, kings, stepper, accordion.
+   Each entry has render(k, H) -> html and optional wire(el, H). */
+(function(){
+"use strict";
+var X = window.EXT_BLOCKS = window.EXT_BLOCKS || {};
+function J(o){ return String(JSON.stringify(o)).replace(/&/g,"&amp;").replace(/"/g,"&quot;"); }
+function rd(el){ return JSON.parse(el.querySelector("[data-k]").getAttribute("data-k")); }
+var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- MAP: simplified geography, places by real longitude/latitude ---------- */
+var BASES = {
+  neareast: {lon0:24, lon1:52, lat0:24, lat1:38.5, labels:[["Mediterranean Sea",28.5,33.6],["Red Sea",36.2,25.2],["Persian Gulf",50.0,27.6],["Arabian Desert",42,28.5]]},
+  israel: {lon0:33.9, lon1:36.9, lat0:29.4, lat1:33.7, labels:[["Mediterranean Sea",34.2,32.6],["Negev",34.85,30.6],["Gulf of Aqaba",34.6,29.55]]}
+};
+var GEO = {
+  med: [[18,40],[26.3,40],[26.5,38.4],[27.3,37.0],[28.0,36.6],[29.5,36.2],[30.6,36.8],[32.0,36.5],[33.5,36.1],[34.6,36.8],[36.1,36.9],[36.0,36.0],[35.8,35.4],[35.95,34.7],[35.5,33.9],[35.2,33.1],[35.05,32.85],[34.9,32.5],[34.75,32.0],[34.5,31.6],[34.2,31.32],[33.6,31.13],[32.3,31.25],[31.4,31.55],[30.4,31.45],[29.9,31.2],[29.0,30.9],[27.3,31.4],[25.2,31.6],[22,32.8],[18,32]],
+  cyprus: [[32.3,35.1],[32.9,35.4],[34.6,35.7],[33.9,35.0],[33.0,34.6],[32.4,34.7]],
+  red: [[32.55,29.95],[32.7,29.3],[33.5,28.0],[33.9,27.3],[34.3,26.5],[35.0,25.0],[35.6,23.5],[38,23.5],[37.0,25.2],[36.2,26.3],[35.3,27.8],[34.95,29.52],[34.6,28.6],[34.3,27.85],[33.6,28.4],[32.9,29.4]],
+  gulf: [[48.0,30.1],[49.0,30.1],[50.0,29.2],[50.5,28.0],[51.5,27.9],[53,27.3],[53,23.5],[51.5,24.0],[51.2,26.1],[50.8,24.8],[50.4,25.5],[50.1,26.2],[49.6,26.9],[48.8,27.6],[48.3,28.5],[48.0,29.4]],
+  dead: [[35.47,31.78],[35.56,31.76],[35.6,31.3],[35.5,31.05],[35.39,31.3]],
+  galilee: [[35.55,32.89],[35.64,32.86],[35.65,32.75],[35.58,32.7],[35.52,32.8]],
+  rivers: [
+    [[31.2,30.05],[31.3,29.0],[30.9,28.0],[31.0,27.0],[31.8,26.2],[32.7,25.7],[32.9,24.0],[32.9,23]],
+    [[31.2,30.05],[30.4,31.45]],[[31.2,30.05],[31.8,31.5]],
+    [[38.5,39],[38.3,37.0],[38.2,36.4],[39.0,36.0],[40.1,35.3],[40.9,34.4],[42.0,34.2],[43.3,33.4],[44.3,32.5],[45.3,31.6],[46.4,31.0],[47.4,31.0],[48.0,30.4],[48.3,30.05]],
+    [[40.2,39],[41.2,37.4],[42.3,37.0],[43.1,36.4],[43.3,35.5],[43.8,34.7],[44.4,33.6],[45.3,32.8],[46.0,31.9],[47.2,31.0],[47.4,31.0]],
+    [[35.62,33.25],[35.6,32.89]],[[35.57,32.71],[35.55,32.3],[35.56,31.9],[35.55,31.77]]
+  ]
+};
+function proj(b){
+  var c = Math.cos((b.lat0+b.lat1)/2*Math.PI/180), W = 1000, sx = W/((b.lon1-b.lon0)*c), H = (b.lat1-b.lat0)*sx;
+  return {W:W, H:Math.round(H), p:function(lon,lat){ return [((lon-b.lon0)*c*sx), ((b.lat1-lat)*sx)]; }};
+}
+function poly(pr, pts){ return pts.map(function(q, i){ var p = pr.p(q[0], q[1]); return (i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1); }).join("")+"Z"; }
+function line(pr, pts){ return pts.map(function(q, i){ var p = pr.p(q[0], q[1]); return (i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1); }).join(""); }
+X.map = {
+  render: function(k, H){
+    var b = BASES[k.base] || BASES.neareast, pr = proj(b), s = pr.W/1000, fs = k.base === "israel" ? 15 : 17;
+    var svg = '<svg viewBox="0 0 '+pr.W+' '+pr.H+'" class="geo" role="img" aria-label="'+H.esc(H.plain(k.title||"Map"))+'">'+
+      '<rect width="100%" height="100%" class="land"/>'+
+      ["med","red","gulf","cyprus","dead","galilee"].map(function(n){ return '<path class="'+(n==="cyprus"?"island":"sea")+'" d="'+poly(pr, GEO[n])+'"/>'; }).join("")+
+      GEO.rivers.map(function(r){ return '<path class="river" d="'+line(pr, r)+'"/>'; }).join("")+
+      b.labels.concat((k.regions||[]).map(function(r){ return [r.name, r.lon, r.lat, 1]; })).map(function(l){ var p = pr.p(l[1], l[2]); return '<text class="'+(l[3]?"region":"sealabel")+'" x="'+p[0].toFixed(0)+'" y="'+p[1].toFixed(0)+'" font-size="'+(l[3]?fs+2:fs)+'">'+H.esc(l[0])+'</text>'; }).join("");
+    var byName = {};
+    (k.places||[]).forEach(function(pl){ byName[pl.name] = pr.p(pl.lon, pl.lat); });
+    (k.routes||[]).forEach(function(r, i){
+      var a = byName[r.from], z = byName[r.to]; if (!a || !z) return;
+      var mx = (a[0]+z[0])/2, my = (a[1]+z[1])/2, dx = z[0]-a[0], dy = z[1]-a[1], bend = r.bend == null ? .18 : r.bend;
+      var cx = mx - dy*bend, cy = my + dx*bend;
+      svg += '<path class="route" data-r="'+i+'" style="--rc:'+(r.color||"var(--accent)")+'" d="M'+a[0].toFixed(1)+' '+a[1].toFixed(1)+' Q'+cx.toFixed(1)+' '+cy.toFixed(1)+' '+z[0].toFixed(1)+' '+z[1].toFixed(1)+'" marker-end="url(#ah)"/>';
+    });
+    (k.places||[]).forEach(function(pl, i){
+      var p = byName[pl.name], anchor = pl.label === "left" ? "end" : "start", off = pl.label === "left" ? -12 : 12;
+      svg += '<g class="place" data-i="'+i+'" tabindex="0" role="button" aria-label="'+H.esc(pl.name)+'"><circle class="halo" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="16"/><circle class="dot" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="7"/><text x="'+(p[0]+off).toFixed(1)+'" y="'+(p[1]+5).toFixed(1)+'" text-anchor="'+anchor+'" font-size="'+fs+'">'+H.esc(pl.name)+'</text></g>';
+    });
+    svg += '<defs><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink)" opacity=".7"/></marker></defs></svg>';
+    var legend = (k.routes||[]).length ? '<div class="geo-legend">'+k.routes.map(function(r, i){ return '<button class="chip" data-r="'+i+'"><i style="background:'+(r.color||"var(--accent)")+'"></i>'+H.md(r.label||(r.from+" to "+r.to))+'</button>'; }).join("")+'</div>' : "";
+    return H.title(k, H.I.map)+'<div class="geo-wrap" data-k="'+J(k)+'">'+svg+
+      '<div class="geo-bar">'+((k.routes||[]).length?'<button class="btn small play">Play the journey</button>':'')+'<span class="geo-hint">Tap a place to learn about it.</span></div>'+legend+
+      '<div class="geo-info" aria-live="polite">'+H.md(k.intro||"")+'</div></div>';
+  },
+  wire: function(el, H){
+    var k = rd(el), info = el.querySelector(".geo-info"), routes = el.querySelectorAll(".route"), timer = [];
+    function show(i){ var pl = k.places[i]; el.querySelectorAll(".place").forEach(function(g){ g.classList.toggle("on", +g.dataset.i === i); }); info.innerHTML = '<b>'+H.md(pl.name)+'</b>'+(pl.d?'<p>'+H.md(pl.d)+'</p>':''); }
+    el.querySelectorAll(".place").forEach(function(g){
+      g.addEventListener("click", function(){ show(+g.dataset.i); });
+      g.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); show(+g.dataset.i); } });
+    });
+    function drawRoute(i){
+      var r = routes[i]; if (!r) return; var len = r.getTotalLength();
+      r.style.strokeDasharray = len; r.style.strokeDashoffset = reduce ? 0 : len; r.classList.add("shown");
+      if (!reduce) r.animate([{strokeDashoffset:len},{strokeDashoffset:0}], {duration:1400, easing:"ease-in-out", fill:"forwards"});
+      var rt = k.routes[+r.dataset.r]; info.innerHTML = '<b>'+H.md(rt.label||"")+'</b>'+(rt.d?'<p>'+H.md(rt.d)+'</p>':'');
+      el.querySelectorAll(".chip").forEach(function(c){ c.classList.toggle("on", c.dataset.r === r.dataset.r); });
+    }
+    function play(){
+      timer.forEach(clearTimeout); timer = [];
+      routes.forEach(function(r){ r.classList.remove("shown"); });
+      routes.forEach(function(r, i){ timer.push(setTimeout(function(){ drawRoute(i); }, i*(reduce?50:1900))); });
+    }
+    var pb = el.querySelector(".play"); if (pb) pb.onclick = play;
+    el.querySelectorAll(".chip").forEach(function(c){ c.onclick = function(){ timer.forEach(clearTimeout); drawRoute(+c.dataset.r); }; });
+    // draw all routes once when the map scrolls into view
+    if ("IntersectionObserver" in window){
+      var o = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ o.disconnect(); play(); } }, {threshold:.35}); o.observe(el);
+    } else play();
+  }
+};
+
+/* ---------- TABERNACLE: clickable floor plan with a guided walk from gate to ark ---------- */
+var TAB = [
+  {key:"gate", x:880, y:150, w:16, h:100, label:"Gate"},
+  {key:"altar", x:700, y:170, w:60, h:60, label:"Bronze altar"},
+  {key:"laver", x:590, y:200, r:20, label:"Laver"},
+  {key:"holyplace", x:250, y:140, w:200, h:120, label:"Holy Place", zone:1},
+  {key:"lampstand", x:380, y:228, r:13, label:"Lampstand"},
+  {key:"table", x:370, y:150, w:44, h:26, label:"Table of bread"},
+  {key:"incense", x:290, y:190, w:22, h:22, label:"Incense altar"},
+  {key:"veil", x:244, y:140, w:8, h:120, label:"Veil"},
+  {key:"ark", x:150, y:180, w:52, h:40, label:"Ark of the covenant", zone:2}
+];
+X.tabernacle = {
+  render: function(k, H){
+    var g = '<rect class="t-court" x="40" y="40" width="860" height="320" rx="6"/><text class="t-lab" x="470" y="30" text-anchor="middle">Outer court (100 × 50 cubits)</text>'+
+      '<rect class="t-mostholy" x="90" y="140" width="150" height="120"/><text class="t-lab" x="165" y="132" text-anchor="middle">Most Holy Place</text><text class="t-lab" x="350" y="132" text-anchor="middle">Holy Place</text>'+
+      '<path class="t-walk" d="M900 200 H730 H590 H452 H300 H246 H176"/>'+
+      '<text class="t-lab small" x="905" y="380" text-anchor="end">East: entrance faces the sunrise</text>';
+    TAB.forEach(function(t, i){
+      if (t.zone === 1){ g += '<rect class="t-hit t-holy" data-key="'+t.key+'" x="'+t.x+'" y="'+t.y+'" width="'+t.w+'" height="'+t.h+'" tabindex="0" role="button" aria-label="'+t.label+'"/>'; return; }
+      var shape = t.r ? '<circle cx="'+t.x+'" cy="'+t.y+'" r="'+t.r+'"/>' : '<rect x="'+t.x+'" y="'+t.y+'" width="'+t.w+'" height="'+t.h+'" rx="3"/>';
+      g += '<g class="t-item t-'+t.key+'" data-key="'+t.key+'" tabindex="0" role="button" aria-label="'+t.label+'">'+shape+'</g>';
+    });
+    // re-draw small items above the Holy Place hit area
+    var order = ["lampstand","table","incense","veil","ark"];
+    return H.title(k, H.I.map)+'<div class="tab-wrap" data-k="'+J(k)+'"><svg viewBox="0 0 940 400" class="tab-svg" role="img" aria-label="Floor plan of the tabernacle">'+g+'</svg>'+
+      '<div class="geo-bar"><button class="btn small walk">Walk from the gate to the ark</button><span class="geo-hint">Or tap any piece of furniture.</span></div>'+
+      '<div class="tab-info" aria-live="polite"><b>'+H.md(k.intro_h||"Approaching a holy God")+'</b><p>'+H.md(k.intro||"Every worshipper came in from the east, past the altar and the water, toward the presence of God behind the veil.")+'</p></div></div>';
+  },
+  wire: function(el, H){
+    var k = rd(el), info = el.querySelector(".tab-info"), svg = el.querySelector("svg"), timer = [];
+    // keep furniture above the Holy Place hit area
+    var holy = svg.querySelector(".t-holy"); svg.querySelectorAll(".t-item").forEach(function(n){ svg.appendChild(n); });
+    function show(key){
+      var it = (k.items||{})[key]; if (!it) return;
+      svg.querySelectorAll("[data-key]").forEach(function(n){ n.classList.toggle("on", n.dataset.key === key); });
+      info.innerHTML = '<b>'+H.md(it.h)+'</b>'+(it.ref?'<small>'+H.esc(it.ref)+'</small>':'')+'<p>'+H.md(it.d||"")+'</p>'+(it.christ?'<p class="tab-christ"><strong>Fulfilled in Jesus: </strong>'+H.md(it.christ)+'</p>':'');
+      if (info.animate && !reduce) info.animate([{opacity:0, transform:"translateY(6px)"},{opacity:1, transform:"none"}], {duration:300});
+    }
+    svg.querySelectorAll("[data-key]").forEach(function(n){
+      n.addEventListener("click", function(){ timer.forEach(clearTimeout); show(n.dataset.key); });
+      n.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); show(n.dataset.key); } });
+    });
+    el.querySelector(".walk").onclick = function(){
+      timer.forEach(clearTimeout); timer = [];
+      var path = svg.querySelector(".t-walk"), len = path.getTotalLength();
+      path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
+      if (path.animate) path.animate([{strokeDashoffset:len},{strokeDashoffset:0}], {duration:reduce?10:9000, easing:"linear", fill:"forwards"});
+      ["gate","altar","laver","holyplace","lampstand","table","incense","veil","ark"].forEach(function(key, i){ timer.push(setTimeout(function(){ show(key); }, i*(reduce?10:1100))); });
+    };
+  }
+};
+
+/* ---------- CONNECT: shadow -> substance with drawn connector lines ---------- */
+X.connect = {
+  render: function(k, H){
+    return H.title(k, H.I.diagram)+'<div class="con" data-k="'+J(k)+'"><div class="con-head"><span>'+H.md(k.left||"Shadow")+'</span><span>'+H.md(k.right||"Substance")+'</span></div>'+
+      '<div class="con-grid"><svg class="con-lines" aria-hidden="true"></svg>'+
+      k.pairs.map(function(p, i){ return '<button class="con-l" data-i="'+i+'">'+H.md(p.a)+'</button><span class="con-gap"></span><button class="con-r" data-i="'+i+'">'+H.md(p.b)+'</button>'; }).join("")+
+      '</div><div class="con-info" aria-live="polite">Tap either side to see how they connect.</div></div>';
+  },
+  wire: function(el, H){
+    var k = rd(el), grid = el.querySelector(".con-grid"), svg = el.querySelector(".con-lines"), info = el.querySelector(".con-info"), active = -1;
+    function draw(){
+      var g = grid.getBoundingClientRect(); svg.setAttribute("viewBox", "0 0 "+g.width+" "+g.height); svg.setAttribute("width", g.width); svg.setAttribute("height", g.height);
+      var out = "";
+      k.pairs.forEach(function(p, i){
+        var a = grid.querySelector('.con-l[data-i="'+i+'"]').getBoundingClientRect(), b = grid.querySelector('.con-r[data-i="'+i+'"]').getBoundingClientRect();
+        var x1 = a.right-g.left, y1 = a.top+a.height/2-g.top, x2 = b.left-g.left, y2 = b.top+b.height/2-g.top, mx = (x1+x2)/2;
+        out += '<path class="'+(i===active?"on":"")+'" style="animation-delay:'+(i*0.12)+'s" d="M'+x1+' '+y1+' C'+mx+' '+y1+' '+mx+' '+y2+' '+x2+' '+y2+'"/>';
+      });
+      svg.innerHTML = out;
+    }
+    function pick(i){
+      active = i; draw();
+      el.querySelectorAll(".con-l,.con-r").forEach(function(b){ b.classList.toggle("on", +b.dataset.i === i); });
+      var p = k.pairs[i]; info.innerHTML = '<b>'+H.md(p.a)+' → '+H.md(p.b)+'</b><p>'+H.md(p.d||"")+'</p>'+(p.ref?'<small>'+H.esc(p.ref)+'</small>':'');
+    }
+    el.querySelectorAll(".con-l,.con-r").forEach(function(b){ b.onclick = function(){ pick(+b.dataset.i); }; });
+    requestAnimationFrame(draw); window.addEventListener("resize", draw);
+    if ("IntersectionObserver" in window){ var o = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ o.disconnect(); draw(); el.classList.add("drawn"); } }); o.observe(el); }
+  }
+};
+
+/* ---------- MATCH: tap-to-pair memory game ---------- */
+X.match = {
+  render: function(k, H){
+    var idx = k.pairs.map(function(_, i){ return i; }), right = idx.slice();
+    for (var i = right.length-1; i > 0; i--){ var j = Math.floor(Math.random()*(i+1)); var t = right[i]; right[i] = right[j]; right[j] = t; }
+    return H.title(k, H.I.quiz)+'<div class="match" data-k="'+J(k)+'"><p class="match-how">'+H.md(k.how||"Tap an item on the left, then its partner on the right.")+'</p><div class="match-cols"><div>'+
+      idx.map(function(i){ return '<button class="m-a" data-i="'+i+'">'+H.md(k.pairs[i].a)+'</button>'; }).join("")+'</div><div>'+
+      right.map(function(i){ return '<button class="m-b" data-i="'+i+'">'+H.md(k.pairs[i].b)+'</button>'; }).join("")+
+      '</div></div><div class="match-score" aria-live="polite"></div></div>';
+  },
+  wire: function(el, H){
+    var k = rd(el), sel = null, done = 0, tries = 0, score = el.querySelector(".match-score");
+    el.querySelectorAll(".m-a").forEach(function(b){ b.onclick = function(){ if (b.disabled) return; el.querySelectorAll(".m-a").forEach(function(x){ x.classList.remove("sel"); }); b.classList.add("sel"); sel = b; }; });
+    el.querySelectorAll(".m-b").forEach(function(b){ b.onclick = function(){
+      if (!sel || b.disabled) return; tries++;
+      if (sel.dataset.i === b.dataset.i){
+        [sel, b].forEach(function(x){ x.classList.remove("sel"); x.classList.add("ok"); x.disabled = true; }); done++; sel = null;
+        if (done === k.pairs.length) score.textContent = "All " + done + " matched in " + tries + " tries." + (tries === done ? " Perfect!" : "");
+        else score.textContent = done + " of " + k.pairs.length + " matched.";
+      } else { b.classList.add("no"); setTimeout(function(){ b.classList.remove("no"); }, 450); }
+    }; });
+  }
+};
+
+/* ---------- RINGS: concentric zones (e.g. degrees of holiness) ---------- */
+X.rings = {
+  render: function(k, H){
+    var n = k.items.length, out = "";
+    k.items.forEach(function(it, i){ var r = 48 - i*(40/n); out += '<circle class="ring-z" data-i="'+i+'" cx="50" cy="50" r="'+r.toFixed(1)+'" style="--o:'+(0.12+i*(0.75/n)).toFixed(2)+';animation-delay:'+(i*0.15)+'s" tabindex="0" role="button" aria-label="'+H.esc(H.plain(it.h))+'"/>'; });
+    k.items.forEach(function(it, i){ var r = 48 - i*(40/n); out += '<text x="50" y="'+(50 - r + 4.2).toFixed(1)+'" text-anchor="middle" class="ring-t">'+H.esc(H.plain(it.h))+'</text>'; });
+    return H.title(k, H.I.diagram)+'<div class="rings" data-k="'+J(k)+'"><svg viewBox="0 0 100 100" class="rings-svg">'+out+'</svg><div class="rings-info" aria-live="polite"><b>'+H.md(k.center||"Tap a ring")+'</b><p>'+H.md(k.hint||"Each step inward is a step closer to God's presence.")+'</p></div></div>';
+  },
+  wire: function(el, H){
+    var k = rd(el), info = el.querySelector(".rings-info");
+    el.querySelectorAll(".ring-z").forEach(function(c){
+      function go(e){ e.stopPropagation(); el.querySelectorAll(".ring-z").forEach(function(x){ x.classList.toggle("on", x === c); }); var it = k.items[+c.dataset.i]; info.innerHTML = '<b>'+H.md(it.h)+'</b><p>'+H.md(it.d||"")+'</p>'; }
+      c.addEventListener("click", go); c.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); go(e); } });
+    });
+  }
+};
+
+/* ---------- KINGS: filterable reign chart ---------- */
+var VERDICT = {good:"Did right", bad:"Did evil", mixed:"Mixed"};
+X.kings = {
+  render: function(k, H){
+    var groups = []; k.items.forEach(function(it){ if (groups.indexOf(it.group) < 0) groups.push(it.group); });
+    return H.title(k, H.I.diagram)+'<div class="kings" data-k="'+J(k)+'"><div class="k-filters"><button class="chip on" data-g="">All</button>'+
+      groups.map(function(g){ return '<button class="chip" data-g="'+H.esc(g)+'">'+H.esc(g)+'</button>'; }).join("")+
+      '<span class="k-legend"><i class="v-good"></i>Did right <i class="v-mixed"></i>Mixed <i class="v-bad"></i>Did evil</span></div>'+
+      '<div class="k-list">'+k.items.map(function(it, i){
+        return '<button class="k-row v-'+(it.verdict||"mixed")+'" data-g="'+H.esc(it.group)+'" data-i="'+i+'" style="animation-delay:'+(i*0.03)+'s"><span class="k-n">'+H.md(it.name)+'</span><span class="k-when">'+H.esc(it.when||"")+'</span><span class="k-g">'+H.esc(it.group)+'</span>'+
+          '<span class="k-more"><span>'+H.md(it.d||"")+'</span>'+(it.ref?'<small>'+H.esc(it.ref)+'</small>':'')+(it.verdict?'<small>Verdict: '+VERDICT[it.verdict]+'</small>':'')+'</span></button>';
+      }).join("")+'</div></div>';
+  },
+  wire: function(el){
+    el.querySelectorAll(".k-filters .chip").forEach(function(c){ c.onclick = function(){
+      el.querySelectorAll(".k-filters .chip").forEach(function(x){ x.classList.toggle("on", x === c); });
+      el.querySelectorAll(".k-row").forEach(function(r){ r.hidden = !!c.dataset.g && r.dataset.g !== c.dataset.g; });
+    }; });
+    el.querySelectorAll(".k-row").forEach(function(r){ r.onclick = function(){ r.classList.toggle("open"); }; });
+  }
+};
+
+/* ---------- STEPPER: one step at a time, animated ---------- */
+X.stepper = {
+  render: function(k, H){
+    return H.title(k, H.I.diagram)+'<div class="stepper" data-k="'+J(k)+'"><div class="st-track"><div class="st-fill"></div></div><div class="st-dots">'+
+      k.items.map(function(_, i){ return '<button class="st-dot'+(i?"":" on")+'" data-i="'+i+'" aria-label="Step '+(i+1)+'">'+(i+1)+'</button>'; }).join("")+'</div>'+
+      '<div class="st-stage" aria-live="polite"></div><div class="st-nav"><button class="btn ghost small st-prev">Back</button><button class="btn small st-next">Next step</button></div></div>';
+  },
+  wire: function(el, H){
+    var k = rd(el), i = 0, stage = el.querySelector(".st-stage"), dir = 1;
+    function go(n){
+      dir = n >= i ? 1 : -1; i = Math.max(0, Math.min(k.items.length-1, n)); var it = k.items[i];
+      stage.innerHTML = '<div class="st-card"><span class="st-num">Step '+(i+1)+' of '+k.items.length+'</span><h4>'+H.md(it.h)+'</h4><p>'+H.md(it.d||"")+'</p>'+(it.why?'<p class="st-why"><strong>Why: </strong>'+H.md(it.why)+'</p>':'')+(it.christ?'<p class="st-christ"><strong>Pointing to Jesus: </strong>'+H.md(it.christ)+'</p>':'')+(it.ref?'<small>'+H.esc(it.ref)+'</small>':'')+'</div>';
+      var card = stage.firstChild; if (card.animate && !reduce) card.animate([{opacity:0, transform:"translateX("+(dir*30)+"px)"},{opacity:1, transform:"none"}], {duration:350, easing:"ease-out"});
+      el.querySelectorAll(".st-dot").forEach(function(d){ d.classList.toggle("on", +d.dataset.i <= i); });
+      el.querySelector(".st-fill").style.width = (k.items.length > 1 ? i/(k.items.length-1)*100 : 100) + "%";
+      el.querySelector(".st-prev").disabled = i === 0; el.querySelector(".st-next").textContent = i === k.items.length-1 ? "Start again" : "Next step";
+    }
+    el.querySelector(".st-prev").onclick = function(){ go(i-1); };
+    el.querySelector(".st-next").onclick = function(){ go(i === k.items.length-1 ? 0 : i+1); };
+    el.querySelectorAll(".st-dot").forEach(function(d){ d.onclick = function(){ go(+d.dataset.i); }; });
+    go(0);
+  }
+};
+
+/* ---------- ACCORDION: expandable detail ---------- */
+X.accordion = {
+  render: function(k, H){
+    return H.title(k, H.I.bulb)+'<div class="acc">'+k.items.map(function(it){ return '<details><summary>'+H.md(it.h)+'</summary><div>'+H.md(it.d||"").split(/\n\n/).map(function(p){ return '<p>'+p+'</p>'; }).join("")+(it.ref?'<small>'+H.esc(it.ref)+'</small>':'')+'</div></details>'; }).join("")+'</div>';
+  }
+};
+})();
+
 (function(){
 "use strict";
 var BOOKS = window.BOOKS || [];
@@ -13847,6 +14282,10 @@ var R = {
     return title(k)+'<div class="cycle" id="'+uid+'" data-items="'+esc(JSON.stringify(k.items))+'"><svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true"><circle class="ring-path" cx="50" cy="50" r="35.5"/></svg>'+nodes+'<div class="center"><b>'+md(k.center||"Tap a circle")+'</b><span>'+md(k.hint||"Each one opens its meaning here.")+'</span></div></div>';
   }
 };
+/* extension blocks (src/blocks2.js) plug in here */
+var H = {md:md, esc:esc, plain:plain, slug:slug, I:I, title:title, $:$, $$:$$, store:store};
+var EXT = window.EXT_BLOCKS || {};
+Object.keys(EXT).forEach(function(name){ R[name] = function(k){ return '<div class="ext ext-'+name+'">'+EXT[name].render(k, H)+'</div>'; }; });
 function renderBlock(k){
   var f = R[k.t]; if (!f) return "";
   var cls = k.t === "p" ? "" : " reveal";
@@ -13860,6 +14299,7 @@ var io = ("IntersectionObserver" in window) ? new IntersectionObserver(function(
 function wire(root){
   $$(".reveal", root).forEach(function(el){ if (io) io.observe(el); else el.classList.add("in"); });
   $$(".flip", root).forEach(function(b){ b.onclick = function(){ b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true"); }; });
+  Object.keys(EXT).forEach(function(name){ if (EXT[name].wire) $$(".ext-"+name, root).forEach(function(el){ EXT[name].wire(el, H); }); });
   $$(".cycle", root).forEach(function(c){
     var items = JSON.parse(c.dataset.items), center = $(".center", c);
     c.addEventListener("click", function(e){
@@ -13895,7 +14335,7 @@ function viewHome(){
   var total = 0; BOOKS.forEach(function(b){ total += b.chapters.length; });
   var h = '<section class="wrap hero">'+
     '<div><h1>Read the Bible with first-century Jewish eyes.</h1>'+
-    '<p class="lead">Three studies in one place: how Jesus taught as a Jewish rabbi, what Israel’s feasts reveal about him, and how the book of Revelation reads to someone steeped in the Hebrew Scriptures. '+total+' chapters, each with diagrams, flashcards and a short quiz.</p>'+
+    '<p class="lead">Four studies in one place: how Jesus taught as a Jewish rabbi, what Israel’s feasts reveal about him, how Revelation reads to someone steeped in the Hebrew Scriptures, and a deep study of the covenants, sacrifices, priests, kings, prophets and exile that the gospel fulfils. '+total+' chapters, with maps, diagrams, games and quizzes.</p>'+
     '<div class="cta"><a class="btn" href="#/'+(BOOKS[0]?BOOKS[0].id:"")+'">Start reading</a><a class="btn ghost" href="#/glossary">Browse the glossary</a></div></div>'+
     menorahSVG()+'</section>'+
     '<section class="wrap"><div class="sectionhead"><h2>Choose a study</h2></div><div class="books">'+
@@ -13909,6 +14349,8 @@ function viewHome(){
       '<a class="tool" href="#/glossary">'+I.book+'<b>Glossary</b><span>Every Hebrew and Greek word explained in plain English.</span></a>'+
       '<a class="tool" href="#/maps">'+I.map+'<b>Big-picture maps</b><span>The skeleton of each study on one screen.</span></a>'+
       '<a class="tool" href="#/cards">'+I.quiz+'<b>Flashcards</b><span>Flip cards from every chapter to test your memory.</span></a>'+
+      '<a class="tool" href="#/atlas">'+I.map+'<b>Bible atlas</b><span>Every animated map: journeys, exiles and returns.</span></a>'+
+      '<a class="tool" href="#/connections">'+I.diagram+'<b>Shadow to substance</b><span>Every link from the Old Testament pattern to Jesus.</span></a>'+
       '<a class="tool" href="#/'+(BOOKS[1]?BOOKS[1].id:"")+'">'+I.calendar+'<b>Feast calendar</b><span>The yearly cycle of Israel’s appointed times.</span></a>'+
     '</div></section>';
   return h;
@@ -13987,6 +14429,18 @@ function viewMaps(){
   return '<section class="wrap bookhead"><div class="crumbs"><a href="#/">Home</a> / Big-picture maps</div><h1>Big-picture maps</h1><p class="lead">The skeleton of each study: every chapter and the topics inside it. Tap a chapter to open it.</p></section>'+
     '<section class="wrap">'+BOOKS.map(function(b){ return '<h2 style="margin-top:24px">'+esc(b.title)+'</h2>'+mindmap(b, true); }).join("")+'</section>';
 }
+function collect(type){
+  var out = [];
+  BOOKS.forEach(function(b){ b.chapters.forEach(function(c){ (c.sections||[]).forEach(function(s){ (s.blocks||[]).forEach(function(k){ if (k.t === type) out.push({k:k, b:b, c:c}); }); }); }); });
+  return out;
+}
+function viewGathered(type, crumb, lead){
+  var list = collect(type);
+  return '<section class="wrap bookhead"><div class="crumbs"><a href="#/">Home</a> / '+crumb+'</div><h1>'+crumb+'</h1><p class="lead">'+lead.replace("{n}", list.length)+'</p></section>'+
+    '<section class="wrap" style="padding-bottom:48px"><article class="chapter" style="max-width:900px">'+list.map(function(x){
+      return renderBlock(x.k).replace('<div class="blk reveal">', '<div class="blk reveal"><p class="gather-src"><a href="#/'+x.b.id+'/'+x.c.id+'">'+esc(x.c.title)+'</a> · '+esc(x.b.short)+'</p>');
+    }).join("")+'</article></section>';
+}
 function viewCards(){
   var cards = [];
   BOOKS.forEach(function(b){ b.chapters.forEach(function(c){ (c.sections||[]).forEach(function(s){ (s.blocks||[]).forEach(function(k){ if (k.t==="flip") k.items.forEach(function(f){ cards.push({f:f, b:b}); }); }); }); }); });
@@ -14005,6 +14459,8 @@ function route(){
   else if (parts[0] === "glossary") html = viewGlossary(parts[1]||"");
   else if (parts[0] === "maps") html = viewMaps();
   else if (parts[0] === "cards") html = viewCards();
+  else if (parts[0] === "atlas") html = viewGathered("map", "Bible atlas", "{n} interactive maps from every study. Press play to watch each journey, or tap a place to read about it.");
+  else if (parts[0] === "connections") html = viewGathered("connect", "Shadow to substance", "{n} connection diagrams linking the Old Testament patterns to their fulfilment. Tap either side to see the link.");
   else if ((b = find(parts[0]))){
     if (parts[1] && parts[1].indexOf("tab-") === 0) html = viewBook(b, parts[1].slice(4));
     else if (parts[1]){ c = b.chapters.filter(function(x){ return x.id === parts[1]; })[0]; html = c ? viewChapter(b, c) : viewBook(b); }

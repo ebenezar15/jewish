@@ -36,4 +36,16 @@ window.BOOKS.push({
   overview: window.OVERVIEW_REVELATION || [],
   chapters: CH.revelation || []
 });
+
+window.BOOKS.push({
+  id: "shadows",
+  title: "Shadows and Substance",
+  short: "Shadows and Substance",
+  tagline: "Kings, priests, prophets, covenants, sacrifices and cleansing laws: the whole Old Testament pattern and how Jesus fulfils it.",
+  intro: "A deep study of how God shaped Israel's life: the covenants, the tabernacle and its sacrifices, purity and cleansing, the Sabbath and feasts, the judges, kings and prophets, and the exile and return. Each one is explained in its own world first, then traced forward to the relational gospel that fulfils it.",
+  icon: "book",
+  color: "#8B1E3F",
+  overview: window.OVERVIEW_SHADOWS || [],
+  chapters: CH.shadows || []
+});
 })();

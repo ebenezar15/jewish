@@ -195,6 +195,10 @@ var R = {
     return title(k)+'<div class="cycle" id="'+uid+'" data-items="'+esc(JSON.stringify(k.items))+'"><svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true"><circle class="ring-path" cx="50" cy="50" r="35.5"/></svg>'+nodes+'<div class="center"><b>'+md(k.center||"Tap a circle")+'</b><span>'+md(k.hint||"Each one opens its meaning here.")+'</span></div></div>';
   }
 };
+/* extension blocks (src/blocks2.js) plug in here */
+var H = {md:md, esc:esc, plain:plain, slug:slug, I:I, title:title, $:$, $$:$$, store:store};
+var EXT = window.EXT_BLOCKS || {};
+Object.keys(EXT).forEach(function(name){ R[name] = function(k){ return '<div class="ext ext-'+name+'">'+EXT[name].render(k, H)+'</div>'; }; });
 function renderBlock(k){
   var f = R[k.t]; if (!f) return "";
   var cls = k.t === "p" ? "" : " reveal";
@@ -208,6 +212,7 @@ var io = ("IntersectionObserver" in window) ? new IntersectionObserver(function(
 function wire(root){
   $$(".reveal", root).forEach(function(el){ if (io) io.observe(el); else el.classList.add("in"); });
   $$(".flip", root).forEach(function(b){ b.onclick = function(){ b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true"); }; });
+  Object.keys(EXT).forEach(function(name){ if (EXT[name].wire) $$(".ext-"+name, root).forEach(function(el){ EXT[name].wire(el, H); }); });
   $$(".cycle", root).forEach(function(c){
     var items = JSON.parse(c.dataset.items), center = $(".center", c);
     c.addEventListener("click", function(e){
@@ -243,7 +248,7 @@ function viewHome(){
   var total = 0; BOOKS.forEach(function(b){ total += b.chapters.length; });
   var h = '<section class="wrap hero">'+
     '<div><h1>Read the Bible with first-century Jewish eyes.</h1>'+
-    '<p class="lead">Three studies in one place: how Jesus taught as a Jewish rabbi, what Israel’s feasts reveal about him, and how the book of Revelation reads to someone steeped in the Hebrew Scriptures. '+total+' chapters, each with diagrams, flashcards and a short quiz.</p>'+
+    '<p class="lead">Four studies in one place: how Jesus taught as a Jewish rabbi, what Israel’s feasts reveal about him, how Revelation reads to someone steeped in the Hebrew Scriptures, and a deep study of the covenants, sacrifices, priests, kings, prophets and exile that the gospel fulfils. '+total+' chapters, with maps, diagrams, games and quizzes.</p>'+
     '<div class="cta"><a class="btn" href="#/'+(BOOKS[0]?BOOKS[0].id:"")+'">Start reading</a><a class="btn ghost" href="#/glossary">Browse the glossary</a></div></div>'+
     menorahSVG()+'</section>'+
     '<section class="wrap"><div class="sectionhead"><h2>Choose a study</h2></div><div class="books">'+
@@ -257,6 +262,8 @@ function viewHome(){
       '<a class="tool" href="#/glossary">'+I.book+'<b>Glossary</b><span>Every Hebrew and Greek word explained in plain English.</span></a>'+
       '<a class="tool" href="#/maps">'+I.map+'<b>Big-picture maps</b><span>The skeleton of each study on one screen.</span></a>'+
       '<a class="tool" href="#/cards">'+I.quiz+'<b>Flashcards</b><span>Flip cards from every chapter to test your memory.</span></a>'+
+      '<a class="tool" href="#/atlas">'+I.map+'<b>Bible atlas</b><span>Every animated map: journeys, exiles and returns.</span></a>'+
+      '<a class="tool" href="#/connections">'+I.diagram+'<b>Shadow to substance</b><span>Every link from the Old Testament pattern to Jesus.</span></a>'+
       '<a class="tool" href="#/'+(BOOKS[1]?BOOKS[1].id:"")+'">'+I.calendar+'<b>Feast calendar</b><span>The yearly cycle of Israel’s appointed times.</span></a>'+
     '</div></section>';
   return h;
@@ -335,6 +342,18 @@ function viewMaps(){
   return '<section class="wrap bookhead"><div class="crumbs"><a href="#/">Home</a> / Big-picture maps</div><h1>Big-picture maps</h1><p class="lead">The skeleton of each study: every chapter and the topics inside it. Tap a chapter to open it.</p></section>'+
     '<section class="wrap">'+BOOKS.map(function(b){ return '<h2 style="margin-top:24px">'+esc(b.title)+'</h2>'+mindmap(b, true); }).join("")+'</section>';
 }
+function collect(type){
+  var out = [];
+  BOOKS.forEach(function(b){ b.chapters.forEach(function(c){ (c.sections||[]).forEach(function(s){ (s.blocks||[]).forEach(function(k){ if (k.t === type) out.push({k:k, b:b, c:c}); }); }); }); });
+  return out;
+}
+function viewGathered(type, crumb, lead){
+  var list = collect(type);
+  return '<section class="wrap bookhead"><div class="crumbs"><a href="#/">Home</a> / '+crumb+'</div><h1>'+crumb+'</h1><p class="lead">'+lead.replace("{n}", list.length)+'</p></section>'+
+    '<section class="wrap" style="padding-bottom:48px"><article class="chapter" style="max-width:900px">'+list.map(function(x){
+      return renderBlock(x.k).replace('<div class="blk reveal">', '<div class="blk reveal"><p class="gather-src"><a href="#/'+x.b.id+'/'+x.c.id+'">'+esc(x.c.title)+'</a> · '+esc(x.b.short)+'</p>');
+    }).join("")+'</article></section>';
+}
 function viewCards(){
   var cards = [];
   BOOKS.forEach(function(b){ b.chapters.forEach(function(c){ (c.sections||[]).forEach(function(s){ (s.blocks||[]).forEach(function(k){ if (k.t==="flip") k.items.forEach(function(f){ cards.push({f:f, b:b}); }); }); }); }); });
@@ -353,6 +372,8 @@ function route(){
   else if (parts[0] === "glossary") html = viewGlossary(parts[1]||"");
   else if (parts[0] === "maps") html = viewMaps();
   else if (parts[0] === "cards") html = viewCards();
+  else if (parts[0] === "atlas") html = viewGathered("map", "Bible atlas", "{n} interactive maps from every study. Press play to watch each journey, or tap a place to read about it.");
+  else if (parts[0] === "connections") html = viewGathered("connect", "Shadow to substance", "{n} connection diagrams linking the Old Testament patterns to their fulfilment. Tap either side to see the link.");
   else if ((b = find(parts[0]))){
     if (parts[1] && parts[1].indexOf("tab-") === 0) html = viewBook(b, parts[1].slice(4));
     else if (parts[1]){ c = b.chapters.filter(function(x){ return x.id === parts[1]; })[0]; html = c ? viewChapter(b, c) : viewBook(b); }

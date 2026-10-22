@@ -53,3 +53,26 @@ window.OVERVIEW_REVELATION = [
     {h:"Reading as Jewish apocalyptic", items:["Symbols point back to Hebrew Scripture","Numbers carry meaning (7, 12, 3½, 666)","The message is faithfulness and hope"]}
   ]}
 ];
+
+window.OVERVIEW_SHADOWS = [
+  {t:"p", text:"God did not hand Israel a list of rituals for their own sake. Every covenant, sacrifice, washing, feast, priest, king and prophet was part of one relationship: **a holy God making a way to live among an unholy people**. This study explains each one in its own world (how it worked, who did it, under what conditions and why), then shows how it was a **shadow** of something fuller that Jesus brings."},
+  {t:"quote", text:"These are a shadow of the things to come, but the substance belongs to Christ.", ref:"Colossians 2:17"},
+  {t:"tree", title:"The skeleton of this study", root:"Shadows and Substance", children:[
+    {h:"The framework", children:["The big story from Eden to the New Jerusalem","The covenants","The Law of Moses"]},
+    {h:"Approaching a holy God", children:["Tabernacle and temple","Sacrifices and offerings","Clean and unclean","Priests and Levites"]},
+    {h:"Holy time", children:["Sabbath, sabbatical year and Jubilee","The sacred calendar and festivals"]},
+    {h:"Leaders and history", children:["The judges","The kings","The prophets","Exile and return"]},
+    {h:"Fulfilment", children:["Reading shadows and types","The relational gospel"]}
+  ]},
+  {t:"timeline", title:"The thread of God dwelling with people", items:[
+    {when:"Beginning", h:"Eden", d:"God walks with Adam and Eve in the garden (Genesis 3:8)."},
+    {when:"c. 1446 BC", h:"The tabernacle", d:"“Let them make me a sanctuary, that I may dwell in their midst” (Exodus 25:8)."},
+    {when:"c. 959 BC", h:"Solomon's temple", d:"The glory cloud fills the house (1 Kings 8:10-11)."},
+    {when:"586 BC", h:"Glory departs, temple destroyed", d:"Ezekiel sees the glory leave (Ezekiel 10–11); Babylon burns the temple."},
+    {when:"c. 4 BC", h:"Jesus", d:"“The Word became flesh and dwelt (tabernacled) among us” (John 1:14)."},
+    {when:"AD 30s", h:"The Spirit in his people", d:"Believers become God's temple (1 Corinthians 3:16; Ephesians 2:21-22)."},
+    {when:"The end", h:"The New Jerusalem", d:"“The dwelling place of God is with man”, and there is no temple, for God and the Lamb are its temple (Revelation 21:3, 22)."}
+  ]},
+  {t:"flow", title:"How every chapter works", nodes:[{h:"In its own world", d:"What it was and how it was done"},{h:"Why God gave it", d:"Theological, cultural and practical reasons"},{h:"The shadow", d:"What it pointed to"},{h:"The substance", d:"How Jesus fulfils it"},{h:"The relationship restored", d:"What it means for us now"}]},
+  {t:"callout", title:"Try the interactive pieces", text:"Look for maps you can play, a tabernacle you can walk through, step-by-step rituals, filterable charts of every king and judge, matching games and connection diagrams. The **Bible atlas** and **Shadow to substance** pages on the home screen gather them all in one place."}
+];
